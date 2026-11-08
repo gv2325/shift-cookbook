@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+import preact from '@astrojs/preact';
 
 // Production runs on Render as a static site served from the domain root.
 // SITE_URL sets canonical and Open Graph URLs; Render's RENDER_EXTERNAL_URL is the fallback.
@@ -10,6 +11,7 @@ export default defineConfig({
   site,
   base: process.env.BASE_PATH ?? '/',
   trailingSlash: 'ignore',
+  integrations: [preact()],
   build: {
     format: 'directory',
   },

@@ -1,0 +1,1573 @@
+{
+ "_meta": {
+  "source": "shift-transport.org (SHIFT Transport Analytics Hub), embedded JSON in its Next.js bundle, chunk 43-252298f7259864d5.js",
+  "retrieved": "2026-11-08",
+  "how": "pipeline/shift_hub/extract_bundle_json.js then pipeline/shift_hub/build_dataset.py, then trimmed to Indian cities",
+  "notes": [
+   "Zeros in the source are treated as missing (null).",
+   "conflicts lists fields where the dashboard table (a) and the city profile (b) differ by more than 5%.",
+   "Coordinates are approximate city centres added by hand."
+  ],
+  "modal_order": [
+   "Walking",
+   "Cycling",
+   "Bus",
+   "BRTS",
+   "Metro/Rail",
+   "2W",
+   "3W",
+   "Car",
+   "Other"
+  ]
+ },
+ "cities": [
+  {
+   "name": "Ahmedabad",
+   "lat": 23.03,
+   "lon": 72.58,
+   "pop": 10.81,
+   "rid": 0.9,
+   "cov": 35,
+   "bpm": null,
+   "fleet": null,
+   "att": 21.2,
+   "ff": 35.1,
+   "am": 29.9,
+   "pm": 24.4,
+   "vpk": 291.0,
+   "evk": 5.3,
+   "fpm": 49.5,
+   "cpm": 163.5,
+   "modal": [
+    39,
+    10,
+    5,
+    0,
+    1,
+    31,
+    6,
+    8,
+    0
+   ],
+   "speeds": [
+    29.9,
+    31.3,
+    32.3,
+    32.6,
+    32.4,
+    31.6,
+    30.3,
+    28.8,
+    27.1,
+    25.3,
+    23.0,
+    23.3,
+    24.0,
+    24.8,
+    25.3,
+    25.3,
+    24.6,
+    23.3,
+    21.1,
+    19.8,
+    21.9,
+    24.6,
+    26.4,
+    28.2
+   ],
+   "sources": {
+    "Mobility": "Integrated Mobility Plan for Greater Ahmedabad Region (2011)",
+    "Crashes": "Ministry of Road Transport and Highways - Road Incidents report (2022)",
+    "Buses": "City Public Transport Authorities, ASRTU Reports, PMeBus Sewa Scheme",
+    "Vehicles": "VAAHAN Portal, MoRTH, CEEW 2050 Report"
+   },
+   "conflicts": [
+    {
+     "field": "Car mode share %",
+     "a": 8,
+     "b": 8.7
+    },
+    {
+     "field": "Vehicles per 1,000",
+     "a": 291.5,
+     "b": 243.4
+    }
+   ]
+  },
+  {
+   "name": "Bengaluru",
+   "lat": 12.97,
+   "lon": 77.59,
+   "pop": 14.95,
+   "rid": 5.56,
+   "cov": 55,
+   "bpm": 471.0,
+   "fleet": 7038,
+   "att": 28.8,
+   "ff": 33.4,
+   "am": 22.6,
+   "pm": 16.7,
+   "vpk": 426.0,
+   "evk": 18.3,
+   "fpm": 66.3,
+   "cpm": 332.6,
+   "modal": [
+    10,
+    2,
+    26,
+    0,
+    5,
+    35,
+    14,
+    8,
+    0
+   ],
+   "speeds": [
+    30.6,
+    31.9,
+    32.8,
+    33.2,
+    32.6,
+    31.1,
+    29.0,
+    26.8,
+    24.9,
+    23.9,
+    23.4,
+    23.3,
+    23.5,
+    23.8,
+    24.0,
+    23.8,
+    23.2,
+    22.3,
+    20.7,
+    20.8,
+    22.9,
+    25.2,
+    27.1,
+    28.9
+   ],
+   "sources": {
+    "Mobility": "Comprehensive Mobility Plan for Bengaluru (2020)",
+    "Crashes": "Ministry of Road Transport and Highways - Road Incidents report (2022)",
+    "Buses": "City Public Transport Authorities, ASRTU Reports, PMeBus Sewa Scheme",
+    "Vehicles": "VAAHAN Portal, MoRTH, CEEW 2050 Report"
+   },
+   "conflicts": [
+    {
+     "field": "Fatalities per million",
+     "a": 66.3,
+     "b": 61.0
+    },
+    {
+     "field": "Car mode share %",
+     "a": 8,
+     "b": 9
+    },
+    {
+     "field": "Vehicles per 1,000",
+     "a": 426.3,
+     "b": 399.7
+    }
+   ]
+  },
+  {
+   "name": "Bhopal",
+   "lat": 23.26,
+   "lon": 77.41,
+   "pop": 2.71,
+   "rid": null,
+   "cov": 6,
+   "bpm": 23.0,
+   "fleet": 63,
+   "att": null,
+   "ff": null,
+   "am": null,
+   "pm": null,
+   "vpk": 417.0,
+   "evk": null,
+   "fpm": null,
+   "cpm": 1070.5,
+   "modal": [
+    0,
+    0,
+    7,
+    0,
+    0,
+    25,
+    0,
+    3,
+    0
+   ],
+   "speeds": [
+    25.4,
+    26.1,
+    26.7,
+    27.2,
+    27.6,
+    27.8,
+    27.8,
+    27.5,
+    26.9,
+    26.0,
+    24.1,
+    23,
+    22.9,
+    22.7,
+    22.6,
+    22.5,
+    22.4,
+    22.3,
+    20.7,
+    20.5,
+    21.8,
+    23.0,
+    23.9,
+    24.7
+   ],
+   "sources": {
+    "Mobility": "BRTS@Bhopal (2014)",
+    "Crashes": "Ministry of Road Transport and Highways - Road Incidents report (2022)",
+    "Buses": "City Public Transport Authorities, ASRTU Reports, PMeBus Sewa Scheme",
+    "Vehicles": "VAAHAN Portal, MoRTH, CEEW 2050 Report"
+   },
+   "conflicts": [
+    {
+     "field": "Bus fleet",
+     "a": 63,
+     "b": 294
+    },
+    {
+     "field": "Car mode share %",
+     "a": 3,
+     "b": 7
+    },
+    {
+     "field": "Bus mode share %",
+     "a": 7,
+     "b": 13
+    },
+    {
+     "field": "Vehicles per 1,000",
+     "a": 417.5,
+     "b": 396.0
+    }
+   ]
+  },
+  {
+   "name": "Chennai",
+   "lat": 13.08,
+   "lon": 80.27,
+   "pop": 11.55,
+   "rid": 3.51,
+   "cov": 24,
+   "bpm": 341.0,
+   "fleet": 3944,
+   "att": 27.0,
+   "ff": 37.1,
+   "am": 22.9,
+   "pm": 18.0,
+   "vpk": 383.0,
+   "evk": 8.4,
+   "fpm": 45.4,
+   "cpm": 316.2,
+   "modal": [
+    25,
+    3,
+    23,
+    0,
+    5,
+    30,
+    7,
+    7,
+    0
+   ],
+   "speeds": [
+    32.6,
+    34.3,
+    35.4,
+    35.5,
+    34.8,
+    33.3,
+    31.5,
+    29.5,
+    27.6,
+    26.0,
+    24.8,
+    24.9,
+    25.1,
+    25.4,
+    25.7,
+    25.6,
+    25.2,
+    24.5,
+    21.8,
+    21.8,
+    23.9,
+    26.1,
+    28.2,
+    30.5
+   ],
+   "sources": {
+    "Mobility": "Comprehensive Mobility Plan (2019)",
+    "Crashes": "Ministry of Road Transport and Highways - Road Incidents report (2022)",
+    "Buses": "City Public Transport Authorities, ASRTU Reports, PMeBus Sewa Scheme",
+    "Vehicles": "VAAHAN Portal, MoRTH, CEEW 2050 Report"
+   },
+   "conflicts": [
+    {
+     "field": "Bus mode share %",
+     "a": 23,
+     "b": 19.7
+    },
+    {
+     "field": "Vehicles per 1,000",
+     "a": 382.7,
+     "b": 340.8
+    }
+   ]
+  },
+  {
+   "name": "Coimbatore",
+   "lat": 11.02,
+   "lon": 76.96,
+   "pop": 3.8,
+   "rid": null,
+   "cov": 11,
+   "bpm": 674.0,
+   "fleet": 2559,
+   "att": null,
+   "ff": null,
+   "am": null,
+   "pm": null,
+   "vpk": 279.0,
+   "evk": null,
+   "fpm": null,
+   "cpm": 305.8,
+   "modal": [
+    20,
+    3,
+    33,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "speeds": [
+    30.1,
+    31.3,
+    31.8,
+    31.3,
+    30.1,
+    28.9,
+    27.6,
+    26.3,
+    25.0,
+    23.6,
+    22.3,
+    21.1,
+    20.9,
+    21.3,
+    21.5,
+    21.3,
+    21.1,
+    20.7,
+    19.6,
+    20.2,
+    22.3,
+    24.5,
+    26.4,
+    28.3
+   ],
+   "sources": {
+    "Mobility": "Comprehensive Mobility Plan for Coimbatore Local Planning Area – Draft Final Report (2014)",
+    "Crashes": "Ministry of Road Transport and Highways - Road Incidents report (2022)",
+    "Buses": "City Public Transport Authorities, ASRTU Reports, PMeBus Sewa Scheme",
+    "Vehicles": "VAAHAN Portal, MoRTH, CEEW 2050 Report"
+   },
+   "conflicts": [
+    {
+     "field": "Bus fleet",
+     "a": 2559,
+     "b": 434
+    },
+    {
+     "field": "Bus mode share %",
+     "a": 33,
+     "b": 12
+    },
+    {
+     "field": "Vehicles per 1,000",
+     "a": 278.5,
+     "b": 258.9
+    }
+   ]
+  },
+  {
+   "name": "Delhi",
+   "lat": 28.61,
+   "lon": 77.21,
+   "pop": 21.98,
+   "rid": 11.18,
+   "cov": 29,
+   "bpm": 259.0,
+   "fleet": 5691,
+   "att": 26.3,
+   "ff": 29,
+   "am": 24.8,
+   "pm": 21.3,
+   "vpk": 321.0,
+   "evk": 13.3,
+   "fpm": 66.3,
+   "cpm": 265.5,
+   "modal": [
+    35,
+    7,
+    14,
+    0,
+    10,
+    16,
+    6,
+    12,
+    0
+   ],
+   "speeds": [
+    40.7,
+    41.6,
+    41.7,
+    41.0,
+    39.9,
+    38.7,
+    37.5,
+    36.2,
+    34.9,
+    33.5,
+    32.2,
+    30.9,
+    30.6,
+    31.1,
+    31.4,
+    31.1,
+    30.6,
+    29.9,
+    27,
+    27.8,
+    31.8,
+    35.5,
+    37.6,
+    39.4
+   ],
+   "sources": {
+    "Mobility": "RITES / Economic Survey of Delhi; academic secondary analyses (2021)",
+    "Crashes": "Ministry of Road Transport and Highways - Road Incidents report (2022)",
+    "Buses": "City Public Transport Authorities, ASRTU Reports, PMeBus Sewa Scheme",
+    "Vehicles": "VAAHAN Portal, MoRTH, CEEW 2050 Report"
+   },
+   "conflicts": [
+    {
+     "field": "Bus fleet",
+     "a": 5691,
+     "b": 6297
+    },
+    {
+     "field": "Car mode share %",
+     "a": 12,
+     "b": 8.5
+    },
+    {
+     "field": "Bus mode share %",
+     "a": 14,
+     "b": 19
+    }
+   ]
+  },
+  {
+   "name": "Hyderabad",
+   "lat": 17.39,
+   "lon": 78.49,
+   "pop": 16.92,
+   "rid": 2.52,
+   "cov": 71,
+   "bpm": 554.0,
+   "fleet": 3100,
+   "att": 30.0,
+   "ff": 30.7,
+   "am": 22.7,
+   "pm": 13.1,
+   "vpk": 223.0,
+   "evk": 9.6,
+   "fpm": 20.9,
+   "cpm": 173.9,
+   "modal": [
+    37,
+    5,
+    16,
+    0,
+    2,
+    25,
+    8,
+    7,
+    0
+   ],
+   "speeds": [
+    30.9,
+    32.3,
+    33.1,
+    32.9,
+    32.1,
+    30.9,
+    29.6,
+    28.1,
+    26.4,
+    24.9,
+    23.2,
+    22.8,
+    23.0,
+    23.3,
+    23.4,
+    23.2,
+    22.6,
+    21.8,
+    20.3,
+    20.3,
+    22.5,
+    25,
+    27.0,
+    29.0
+   ],
+   "sources": {
+    "Mobility": "Comprehensive Transportation Study for Hyderabad Metropolitan Area 2041 (2013)",
+    "Crashes": "Ministry of Road Transport and Highways - Road Incidents report (2022)",
+    "Buses": "City Public Transport Authorities, ASRTU Reports, PMeBus Sewa Scheme",
+    "Vehicles": "VAAHAN Portal, MoRTH, CEEW 2050 Report"
+   },
+   "conflicts": [
+    {
+     "field": "Bus fleet",
+     "a": 3100,
+     "b": 3418
+    },
+    {
+     "field": "Fatalities per million",
+     "a": 20.9,
+     "b": 29.6
+    },
+    {
+     "field": "Bus mode share %",
+     "a": 16,
+     "b": 14
+    },
+    {
+     "field": "Vehicles per 1,000",
+     "a": 223.3,
+     "b": 426.4
+    }
+   ]
+  },
+  {
+   "name": "Indore",
+   "lat": 22.72,
+   "lon": 75.86,
+   "pop": 4.79,
+   "rid": 0.2,
+   "cov": 8,
+   "bpm": 115.0,
+   "fleet": 550,
+   "att": null,
+   "ff": null,
+   "am": null,
+   "pm": null,
+   "vpk": 359.0,
+   "evk": null,
+   "fpm": null,
+   "cpm": 744.9,
+   "modal": [
+    0,
+    12,
+    0,
+    0,
+    0,
+    0,
+    0,
+    6,
+    0
+   ],
+   "speeds": [
+    24.2,
+    25.1,
+    25.9,
+    26.7,
+    27.2,
+    27.2,
+    26.9,
+    26.2,
+    25.1,
+    23.8,
+    21.6,
+    20.5,
+    20.6,
+    20.7,
+    20.7,
+    20.8,
+    20.9,
+    20.7,
+    19.7,
+    18.8,
+    19.7,
+    21.2,
+    22.2,
+    23.2
+   ],
+   "sources": {
+    "Mobility": "Comprehensive Mobility Plan for Indore Urban Area (2012)",
+    "Crashes": "Ministry of Road Transport and Highways - Road Incidents report (2022)",
+    "Buses": "City Public Transport Authorities, ASRTU Reports, PMeBus Sewa Scheme",
+    "Vehicles": "VAAHAN Portal, MoRTH, CEEW 2050 Report"
+   },
+   "conflicts": [
+    {
+     "field": "Bus fleet",
+     "a": 550,
+     "b": 489
+    },
+    {
+     "field": "Car mode share %",
+     "a": 6,
+     "b": 7
+    },
+    {
+     "field": "Vehicles per 1,000",
+     "a": 359.2,
+     "b": 339.2
+    }
+   ]
+  },
+  {
+   "name": "Jaipur",
+   "lat": 26.91,
+   "lon": 75.79,
+   "pop": 7.55,
+   "rid": 0.18,
+   "cov": 12,
+   "bpm": 26.0,
+   "fleet": 200,
+   "att": null,
+   "ff": null,
+   "am": null,
+   "pm": null,
+   "vpk": 271.0,
+   "evk": null,
+   "fpm": null,
+   "cpm": 386.1,
+   "modal": [
+    0,
+    0,
+    31,
+    0,
+    0,
+    36,
+    8,
+    13,
+    0
+   ],
+   "speeds": [
+    32.2,
+    33.4,
+    34.0,
+    34.1,
+    33.5,
+    32.6,
+    31.4,
+    30.1,
+    28.6,
+    27.0,
+    25.2,
+    25.0,
+    25.1,
+    25.1,
+    25.2,
+    25.1,
+    24.9,
+    24.5,
+    22.8,
+    22.7,
+    24.8,
+    27.2,
+    29.0,
+    30.7
+   ],
+   "sources": {
+    "Mobility": "Comprehensive Mobility Plan for Jaipur (2010)",
+    "Crashes": "Ministry of Road Transport and Highways - Road Incidents report (2022)",
+    "Buses": "City Public Transport Authorities, ASRTU Reports, PMeBus Sewa Scheme",
+    "Vehicles": "VAAHAN Portal, MoRTH, CEEW 2050 Report"
+   },
+   "conflicts": [
+    {
+     "field": "Bus fleet",
+     "a": 200,
+     "b": 229
+    },
+    {
+     "field": "Car mode share %",
+     "a": 13,
+     "b": 8
+    },
+    {
+     "field": "Bus mode share %",
+     "a": 31,
+     "b": 11
+    }
+   ]
+  },
+  {
+   "name": "Kanpur",
+   "lat": 26.45,
+   "lon": 80.33,
+   "pop": 3.28,
+   "rid": null,
+   "cov": 10,
+   "bpm": null,
+   "fleet": null,
+   "att": null,
+   "ff": null,
+   "am": null,
+   "pm": null,
+   "vpk": null,
+   "evk": null,
+   "fpm": null,
+   "cpm": 409.7,
+   "modal": [
+    29,
+    15,
+    3,
+    0,
+    0,
+    20,
+    0,
+    4,
+    0
+   ],
+   "speeds": [
+    24.7,
+    25.4,
+    26.1,
+    26.7,
+    27.0,
+    26.9,
+    26.4,
+    25.6,
+    24.7,
+    23.5,
+    21.8,
+    20.9,
+    20.9,
+    20.9,
+    21.0,
+    20.9,
+    20.7,
+    20.5,
+    19.2,
+    19.5,
+    20.7,
+    21.8,
+    22.8,
+    23.8
+   ],
+   "sources": {
+    "Mobility": "Comprehensive Mobility Plan for Kanpur",
+    "Crashes": "Ministry of Road Transport and Highways - Road Incidents report (2022)",
+    "Buses": "City Public Transport Authorities, ASRTU Reports, PMeBus Sewa Scheme",
+    "Vehicles": "VAAHAN Portal, MoRTH, CEEW 2050 Report"
+   },
+   "conflicts": [
+    {
+     "field": "Car mode share %",
+     "a": 4,
+     "b": 7
+    },
+    {
+     "field": "Bus mode share %",
+     "a": 3,
+     "b": 11
+    }
+   ]
+  },
+  {
+   "name": "Kochi",
+   "lat": 9.93,
+   "lon": 76.27,
+   "pop": 5.06,
+   "rid": null,
+   "cov": 8,
+   "bpm": 170.0,
+   "fleet": 861,
+   "att": null,
+   "ff": null,
+   "am": null,
+   "pm": null,
+   "vpk": null,
+   "evk": null,
+   "fpm": null,
+   "cpm": 553.8,
+   "modal": [
+    8,
+    3,
+    72,
+    0,
+    0,
+    6,
+    5,
+    4,
+    0
+   ],
+   "speeds": [
+    35.3,
+    36.0,
+    36.2,
+    35.6,
+    34.6,
+    33.5,
+    32.3,
+    31.1,
+    29.9,
+    28.6,
+    27.3,
+    26.9,
+    27.2,
+    27.6,
+    27.6,
+    26.8,
+    25.7,
+    24.7,
+    24.1,
+    25.9,
+    28.2,
+    30.5,
+    32.4,
+    34.0
+   ],
+   "sources": {
+    "Mobility": "Draft Comprehensive Mobility Plan for Kochi (2025)",
+    "Crashes": "Ministry of Road Transport and Highways - Road Incidents report (2022)",
+    "Buses": "City Public Transport Authorities, ASRTU Reports, PMeBus Sewa Scheme",
+    "Vehicles": "VAAHAN Portal, MoRTH, CEEW 2050 Report"
+   },
+   "conflicts": [
+    {
+     "field": "Bus fleet",
+     "a": 861,
+     "b": 99
+    },
+    {
+     "field": "Car mode share %",
+     "a": 4,
+     "b": 12
+    },
+    {
+     "field": "Bus mode share %",
+     "a": 72,
+     "b": 22
+    }
+   ]
+  },
+  {
+   "name": "Kolkata",
+   "lat": 22.57,
+   "lon": 88.36,
+   "pop": 17.63,
+   "rid": 4.33,
+   "cov": 11,
+   "bpm": 43.0,
+   "fleet": 750,
+   "att": 28.8,
+   "ff": 27.6,
+   "am": 22.9,
+   "pm": 16.6,
+   "vpk": 237.0,
+   "evk": 2.2,
+   "fpm": 9.0,
+   "cpm": 113.1,
+   "modal": [
+    21,
+    8,
+    27,
+    0,
+    13,
+    16,
+    6,
+    9,
+    0
+   ],
+   "speeds": [
+    28.0,
+    28.5,
+    29.1,
+    29.6,
+    29.9,
+    29.9,
+    29.6,
+    29.1,
+    28.5,
+    27.8,
+    26.3,
+    26.0,
+    26.4,
+    27.0,
+    27.2,
+    26.9,
+    26.3,
+    25.6,
+    24.6,
+    24.7,
+    25.4,
+    26.1,
+    26.8,
+    27.4
+   ],
+   "sources": {
+    "Mobility": "Comprehensive Mobility Plan 2001–2025, Kolkata Metropolitan Area (2006)",
+    "Crashes": "Ministry of Road Transport and Highways - Road Incidents report (2022)",
+    "Buses": "City Public Transport Authorities, ASRTU Reports, PMeBus Sewa Scheme",
+    "Vehicles": "VAAHAN Portal, MoRTH, CEEW 2050 Report"
+   },
+   "conflicts": [
+    {
+     "field": "Bus fleet",
+     "a": 750,
+     "b": 1410
+    },
+    {
+     "field": "Car mode share %",
+     "a": 9,
+     "b": 6
+    },
+    {
+     "field": "Bus mode share %",
+     "a": 27,
+     "b": 20
+    },
+    {
+     "field": "Vehicles per 1,000",
+     "a": 236.8,
+     "b": 184.1
+    }
+   ]
+  },
+  {
+   "name": "Kozhikode",
+   "lat": 11.26,
+   "lon": 75.78,
+   "pop": 0.91,
+   "rid": null,
+   "cov": 34,
+   "bpm": null,
+   "fleet": null,
+   "att": null,
+   "ff": null,
+   "am": null,
+   "pm": null,
+   "vpk": 475.0,
+   "evk": null,
+   "fpm": null,
+   "cpm": 2416.1,
+   "modal": [
+    0,
+    0,
+    25,
+    0,
+    0,
+    49,
+    0,
+    12,
+    0
+   ],
+   "speeds": [
+    31.1,
+    31.4,
+    31.5,
+    31.5,
+    31.4,
+    31.1,
+    30.6,
+    29.8,
+    28.8,
+    27.5,
+    25.3,
+    24.4,
+    24.5,
+    25.0,
+    25.1,
+    24.8,
+    24.2,
+    23.6,
+    22.3,
+    23.8,
+    26.1,
+    28.1,
+    29.5,
+    30.5
+   ],
+   "sources": {
+    "Mobility": "Draft Comprehensive Mobility Plan for Kozhikode (2025)",
+    "Crashes": "Ministry of Road Transport and Highways - Road Incidents report (2022)",
+    "Buses": "City Public Transport Authorities, ASRTU Reports, PMeBus Sewa Scheme",
+    "Vehicles": "VAAHAN Portal, MoRTH, CEEW 2050 Report"
+   },
+   "conflicts": [
+    {
+     "field": "Car mode share %",
+     "a": 12,
+     "b": 5
+    },
+    {
+     "field": "Bus mode share %",
+     "a": 25,
+     "b": 13
+    },
+    {
+     "field": "Vehicles per 1,000",
+     "a": 474.6,
+     "b": 539.6
+    }
+   ]
+  },
+  {
+   "name": "Lucknow",
+   "lat": 26.85,
+   "lon": 80.95,
+   "pop": 6.32,
+   "rid": 0.14,
+   "cov": 5,
+   "bpm": 19.0,
+   "fleet": 119,
+   "att": 28.0,
+   "ff": 28.9,
+   "am": 23.9,
+   "pm": 16.8,
+   "vpk": 352.0,
+   "evk": 19.0,
+   "fpm": 98.0,
+   "cpm": 231.0,
+   "modal": [
+    18,
+    16,
+    2,
+    0,
+    2,
+    41,
+    17,
+    4,
+    0
+   ],
+   "speeds": [
+    30.0,
+    31.3,
+    32.5,
+    33.5,
+    34.0,
+    33.7,
+    32.7,
+    31.3,
+    29.6,
+    27.9,
+    25.2,
+    25.0,
+    25.0,
+    25.1,
+    25.1,
+    25.1,
+    25.0,
+    24.8,
+    22.6,
+    22.5,
+    24.1,
+    25.7,
+    27.2,
+    28.6
+   ],
+   "sources": {
+    "Mobility": "Lucknow Comprehensive Electric Mobility Plan (2023)",
+    "Crashes": "Ministry of Road Transport and Highways - Road Incidents report (2022)",
+    "Buses": "City Public Transport Authorities, ASRTU Reports, PMeBus Sewa Scheme",
+    "Vehicles": "VAAHAN Portal, MoRTH, CEEW 2050 Report"
+   },
+   "conflicts": [
+    {
+     "field": "Bus fleet",
+     "a": 119,
+     "b": 100
+    },
+    {
+     "field": "Fatalities per million",
+     "a": 98.0,
+     "b": 136.8
+    },
+    {
+     "field": "Car mode share %",
+     "a": 4,
+     "b": 9
+    },
+    {
+     "field": "Bus mode share %",
+     "a": 2,
+     "b": 11
+    },
+    {
+     "field": "Vehicles per 1,000",
+     "a": 351.6,
+     "b": 511.4
+    }
+   ]
+  },
+  {
+   "name": "Mumbai",
+   "lat": 19.08,
+   "lon": 72.88,
+   "pop": 27.39,
+   "rid": 10.76,
+   "cov": 80,
+   "bpm": 99.0,
+   "fleet": 2700,
+   "att": 33.6,
+   "ff": 24.4,
+   "am": 19.4,
+   "pm": 14.2,
+   "vpk": 253.0,
+   "evk": 4.0,
+   "fpm": 14.0,
+   "cpm": 92.5,
+   "modal": [
+    46,
+    1,
+    9,
+    0,
+    23,
+    8,
+    7,
+    6,
+    0
+   ],
+   "speeds": [
+    31.0,
+    32.8,
+    34.2,
+    35.1,
+    35.1,
+    34.0,
+    32.2,
+    30.1,
+    28.1,
+    26.6,
+    25.5,
+    25.3,
+    25.6,
+    25.9,
+    26.1,
+    26.0,
+    25.4,
+    24.4,
+    22.0,
+    21.4,
+    23.2,
+    25.1,
+    27.0,
+    29.0
+   ],
+   "sources": {
+    "Mobility": "Comprehensive Mobility Plan for Greater Mumbai / MMR (2021)",
+    "Crashes": "Ministry of Road Transport and Highways - Road Incidents report (2022)",
+    "Buses": "City Public Transport Authorities, ASRTU Reports, PMeBus Sewa Scheme",
+    "Vehicles": "VAAHAN Portal, MoRTH, CEEW 2050 Report"
+   },
+   "conflicts": [
+    {
+     "field": "Bus fleet",
+     "a": 2700,
+     "b": 4117
+    },
+    {
+     "field": "Car mode share %",
+     "a": 6,
+     "b": 7.3
+    },
+    {
+     "field": "Bus mode share %",
+     "a": 9,
+     "b": 6.5
+    },
+    {
+     "field": "Vehicles per 1,000",
+     "a": 252.8,
+     "b": 227.6
+    }
+   ]
+  },
+  {
+   "name": "Nagpur",
+   "lat": 21.15,
+   "lon": 79.09,
+   "pop": 3.77,
+   "rid": 0.22,
+   "cov": 4,
+   "bpm": 138.0,
+   "fleet": 519,
+   "att": null,
+   "ff": null,
+   "am": null,
+   "pm": null,
+   "vpk": 332.0,
+   "evk": 26.5,
+   "fpm": null,
+   "cpm": 321.6,
+   "modal": [
+    10,
+    4,
+    16,
+    0,
+    1,
+    43,
+    20,
+    6,
+    0
+   ],
+   "speeds": [
+    27.6,
+    28.5,
+    29.5,
+    30.4,
+    31.1,
+    31.2,
+    30.8,
+    30.0,
+    28.8,
+    27.2,
+    24.4,
+    23.0,
+    22.9,
+    22.8,
+    22.9,
+    23.0,
+    23.3,
+    23.4,
+    22,
+    22.1,
+    23.2,
+    24.4,
+    25.5,
+    26.5
+   ],
+   "sources": {
+    "Mobility": "Comprehensive Mobility Plan for Nagpur (2018)",
+    "Crashes": "Ministry of Road Transport and Highways - Road Incidents report (2022)",
+    "Buses": "City Public Transport Authorities, ASRTU Reports, PMeBus Sewa Scheme",
+    "Vehicles": "VAAHAN Portal, MoRTH, CEEW 2050 Report"
+   },
+   "conflicts": [
+    {
+     "field": "Bus fleet",
+     "a": 519,
+     "b": 578
+    },
+    {
+     "field": "Car mode share %",
+     "a": 6,
+     "b": 7
+    },
+    {
+     "field": "Bus mode share %",
+     "a": 16,
+     "b": 11
+    },
+    {
+     "field": "Vehicles per 1,000",
+     "a": 331.6,
+     "b": 371.4
+    }
+   ]
+  },
+  {
+   "name": "Patna",
+   "lat": 25.59,
+   "lon": 85.14,
+   "pop": 4.8,
+   "rid": null,
+   "cov": 1,
+   "bpm": 30.0,
+   "fleet": 145,
+   "att": null,
+   "ff": null,
+   "am": null,
+   "pm": null,
+   "vpk": 313.0,
+   "evk": null,
+   "fpm": null,
+   "cpm": 67.0,
+   "modal": null,
+   "speeds": [
+    25.9,
+    26.3,
+    26.5,
+    26.5,
+    26.4,
+    26.1,
+    25.6,
+    24.8,
+    23.9,
+    22.7,
+    20.0,
+    19.6,
+    19.7,
+    19.9,
+    20.0,
+    20.0,
+    20.1,
+    20.1,
+    18.7,
+    19.2,
+    21.4,
+    23.5,
+    24.5,
+    25.3
+   ],
+   "sources": {
+    "Mobility": "Comprehensive Mobility Plan for Patna (2018)",
+    "Crashes": "Ministry of Road Transport and Highways - Road Incidents report (2022)",
+    "Buses": "City Public Transport Authorities, ASRTU Reports, PMeBus Sewa Scheme",
+    "Vehicles": "VAAHAN Portal, MoRTH, CEEW 2050 Report"
+   },
+   "conflicts": [
+    {
+     "field": "Bus fleet",
+     "a": 145,
+     "b": 137
+    },
+    {
+     "field": "Vehicles per 1,000",
+     "a": 312.7,
+     "b": 289.9
+    }
+   ]
+  },
+  {
+   "name": "Pune",
+   "lat": 18.52,
+   "lon": 73.86,
+   "pop": 13.84,
+   "rid": 1.34,
+   "cov": 11,
+   "bpm": 144.0,
+   "fleet": 1988,
+   "att": 36.3,
+   "ff": 28.4,
+   "am": 18.2,
+   "pm": 12.6,
+   "vpk": 320.0,
+   "evk": 17.8,
+   "fpm": 28.0,
+   "cpm": 88.9,
+   "modal": [
+    26,
+    4,
+    11,
+    0,
+    1,
+    35,
+    9,
+    14,
+    0
+   ],
+   "speeds": [
+    31.5,
+    32.9,
+    33.7,
+    33.9,
+    33.5,
+    32.6,
+    31.4,
+    29.9,
+    28.3,
+    26.6,
+    24.6,
+    24.1,
+    24.2,
+    24.4,
+    24.5,
+    24.5,
+    24.3,
+    24.0,
+    21.9,
+    21.5,
+    23.7,
+    26.2,
+    28.1,
+    29.9
+   ],
+   "sources": {
+    "Mobility": "Comprehensive Mobility Plan for Pune Metropolitan Region (2025)",
+    "Crashes": "Ministry of Road Transport and Highways - Road Incidents report (2022)",
+    "Buses": "City Public Transport Authorities, ASRTU Reports, PMeBus Sewa Scheme",
+    "Vehicles": "VAAHAN Portal, MoRTH, CEEW 2050 Report"
+   },
+   "conflicts": [
+    {
+     "field": "Fatalities per million",
+     "a": 28.0,
+     "b": 25.4
+    },
+    {
+     "field": "Car mode share %",
+     "a": 14,
+     "b": 9
+    },
+    {
+     "field": "Bus mode share %",
+     "a": 11,
+     "b": 13
+    },
+    {
+     "field": "Vehicles per 1,000",
+     "a": 319.6,
+     "b": 294.3
+    }
+   ]
+  },
+  {
+   "name": "Surat",
+   "lat": 21.17,
+   "lon": 72.83,
+   "pop": 8.24,
+   "rid": null,
+   "cov": 2,
+   "bpm": 133.0,
+   "fleet": 1100,
+   "att": 20.7,
+   "ff": 33.5,
+   "am": 29.2,
+   "pm": 25.2,
+   "vpk": 243.0,
+   "evk": 8.1,
+   "fpm": 37.5,
+   "cpm": 78.9,
+   "modal": [
+    42,
+    3,
+    3,
+    0,
+    0,
+    38,
+    10,
+    4,
+    0
+   ],
+   "speeds": [
+    28.1,
+    29.1,
+    29.8,
+    30.4,
+    30.6,
+    30.6,
+    30.2,
+    29.4,
+    28.3,
+    26.7,
+    24.5,
+    22.8,
+    22.9,
+    23.9,
+    24.5,
+    24.6,
+    24.5,
+    23.7,
+    22.0,
+    20.7,
+    22.1,
+    24.5,
+    25.7,
+    27.0
+   ],
+   "sources": {
+    "Mobility": "Comprehensive Mobility Plan Surat 2046 (2018)",
+    "Crashes": "Ministry of Road Transport and Highways - Road Incidents report (2022)",
+    "Buses": "City Public Transport Authorities, ASRTU Reports, PMeBus Sewa Scheme",
+    "Vehicles": "VAAHAN Portal, MoRTH, CEEW 2050 Report"
+   },
+   "conflicts": [
+    {
+     "field": "Bus fleet",
+     "a": 1100,
+     "b": 875
+    },
+    {
+     "field": "Car mode share %",
+     "a": 4,
+     "b": 6
+    },
+    {
+     "field": "Bus mode share %",
+     "a": 3,
+     "b": 13
+    },
+    {
+     "field": "Vehicles per 1,000",
+     "a": 243.1,
+     "b": 227.5
+    }
+   ]
+  },
+  {
+   "name": "Thrissur",
+   "lat": 10.53,
+   "lon": 76.21,
+   "pop": 2.71,
+   "rid": null,
+   "cov": 5,
+   "bpm": null,
+   "fleet": null,
+   "att": null,
+   "ff": null,
+   "am": null,
+   "pm": null,
+   "vpk": 84.0,
+   "evk": null,
+   "fpm": null,
+   "cpm": 963.1,
+   "modal": null,
+   "speeds": [
+    32.3,
+    32.5,
+    32.3,
+    32.0,
+    31.6,
+    31.0,
+    30.3,
+    29.5,
+    28.6,
+    27.5,
+    26.0,
+    25.4,
+    25.8,
+    26.4,
+    26.5,
+    26.0,
+    25.5,
+    24.9,
+    24.3,
+    25.9,
+    27.8,
+    29.7,
+    31.0,
+    31.9
+   ],
+   "sources": {
+    "Crashes": "Ministry of Road Transport and Highways - Road Incidents report (2022)",
+    "Buses": "City Public Transport Authorities, ASRTU Reports, PMeBus Sewa Scheme",
+    "Vehicles": "VAAHAN Portal, MoRTH, CEEW 2050 Report"
+   },
+   "conflicts": []
+  }
+ ]
+}

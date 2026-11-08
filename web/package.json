@@ -13,14 +13,18 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@astrojs/preact": "6.1.2",
     "@fontsource/domine": "5.3.0",
     "@fontsource/public-sans": "5.3.0",
     "@tailwindcss/vite": "4.3.5",
     "astro": "7.4.7",
+    "maplibre-gl": "6.17.0",
+    "preact": "11.2.0",
     "tailwindcss": "4.3.5"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
+    "@types/geojson": "7946.0.16",
     "typescript": "6.0.3"
   }
 }

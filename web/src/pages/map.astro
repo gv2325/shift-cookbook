@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<Base
+  title="Explore map · SHIFT"
+  description="Compare public transit, modal share, road traffic and road safety across 20 Indian cities, with a source on every number."
+  preconnect={['https://tiles.openfreemap.org']}
+>
+  <main id="main" class="h-dvh">
+    <div id="map-app" class="h-full">
+      <p class="p-6 font-light">Loading the map…</p>
+    </div>
+    <noscript>
+      <p class="p-6">The explore map needs JavaScript. The story on the <a href={base}>home page</a> works without it.</p>
+    </noscript>
+  </main>
+</Base>
+
+<script>
+  // Mounted from a bundled module (not an Astro island) so no inline bootstrap script is
+  // needed and the Content-Security-Policy can keep script-src 'self'.
+  import { h, render } from 'preact';
+  import MapApp from '../components/map/MapApp';
+
+  const root = document.getElementById('map-app');
+  if (root) {
+    root.replaceChildren();
+    render(h(MapApp, {}), root);
+  }
+</script>
