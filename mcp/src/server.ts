@@ -148,7 +148,7 @@ const http = createServer(async (req, res) => {
         405,
         rpcError(
           -32000,
-          `This is an MCP endpoint: add it as a connector in Claude (Settings > Connectors) or ChatGPT (Developer mode). It only accepts POST; it does not open event streams. Setup: ${SITE_URL}/connect`,
+          `This is an MCP endpoint: add it as a connector in Claude (Customize > Connectors) or ChatGPT (Developer mode). It only accepts POST; it does not open event streams. Setup: ${SITE_URL}/connect`,
         ),
         { Allow: 'POST, OPTIONS' },
       );
