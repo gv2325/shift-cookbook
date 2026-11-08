@@ -131,7 +131,27 @@ const http = createServer(async (req, res) => {
         return res.end();
       }
       if (req.method === 'POST') return await handleMcp(req, res);
-      return json(res, 405, rpcError(-32000, 'Method not allowed: this server is stateless and only accepts POST /mcp.'), { Allow: 'POST, OPTIONS' });
+      const accept = String(req.headers.accept ?? '');
+      // A person (or an AI's web browser) opening the link: send them to the setup instructions.
+      if (req.method === 'GET' && accept.includes('text/html') && !accept.includes('text/event-stream')) {
+        res.writeHead(302, { Location: `${SITE_URL}/connect`, 'Cache-Control': 'no-store' });
+        return res.end();
+      }
+      // Link checkers probing with HEAD: the endpoint exists.
+      if (req.method === 'HEAD') {
+        res.writeHead(200, { 'Content-Type': 'application/json', Allow: 'POST, OPTIONS' });
+        return res.end();
+      }
+      // MCP clients asking for a server-sent event stream: the spec's answer for a stateless server is 405.
+      return json(
+        res,
+        405,
+        rpcError(
+          -32000,
+          `This is an MCP endpoint: add it as a connector in Claude (Settings > Connectors) or ChatGPT (Developer mode). It only accepts POST; it does not open event streams. Setup: ${SITE_URL}/connect`,
+        ),
+        { Allow: 'POST, OPTIONS' },
+      );
     }
     if (url.pathname === '/' && req.method === 'GET') {
       res.writeHead(302, { Location: `${SITE_URL}/connect` });

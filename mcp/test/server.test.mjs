@@ -105,7 +105,15 @@ test('get_map_link caps at four cities', async () => {
 test('HTTP: health check, GET /mcp is 405, foreign Origin is 403', async () => {
   const h = await fetch(`${BASE}/healthz`).then((r) => r.json());
   assert.equal(h.status, 'ok');
-  assert.equal((await fetch(`${BASE}/mcp`)).status, 405);
+  // MCP client asking for an SSE stream: 405, as the spec expects from a stateless server.
+  const sse = await fetch(`${BASE}/mcp`, { headers: { Accept: 'text/event-stream' } });
+  assert.equal(sse.status, 405);
+  assert.match((await sse.json()).error.message, /add it as a connector/);
+  // A browser opening the link is sent to the setup page; HEAD probes see the endpoint exists.
+  const browser = await fetch(`${BASE}/mcp`, { headers: { Accept: 'text/html,application/xhtml+xml' }, redirect: 'manual' });
+  assert.equal(browser.status, 302);
+  assert.match(browser.headers.get('location'), /\/connect$/);
+  assert.equal((await fetch(`${BASE}/mcp`, { method: 'HEAD' })).status, 200);
   const bad = await fetch(`${BASE}/mcp`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Accept: 'application/json, text/event-stream', Origin: 'https://evil.example' },
