@@ -76,8 +76,9 @@ services:
   - type: web
     runtime: node
     name: shift-cookbook-mcp
-    # Free while testing; switch to `starter` ($7/month, no 15-minute sleep) before sharing widely.
-    plan: free
+    # Starter ($7/month): always on. The free plan sleeps after 15 idle minutes and answers 503
+    # while waking, which MCP clients treat as a broken connector.
+    plan: starter
     region: oregon # Claude and ChatGPT call connectors from their own (US) servers
     buildCommand: cd mcp && npm ci && npm run build
     startCommand: node mcp/dist/server.js
