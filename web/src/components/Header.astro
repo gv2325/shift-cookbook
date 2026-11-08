@@ -1,0 +1,29 @@
+---
+import { STORY } from '../data/story';
+
+const base = import.meta.env.BASE_URL;
+const links = [
+  { label: 'The story', href: '#how' },
+  { label: 'Full StoryMap', href: STORY.url },
+  { label: 'GitHub', href: 'https://github.com/gv2325/shift-cookbook' },
+];
+---
+
+<header class="relative z-20 bg-white">
+  <div class="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-4 px-6 py-6">
+    <a href={base} class="py-1 font-display text-2xl text-navy-500 no-underline">SHIFT</a>
+    <nav aria-label="Main">
+      <ul class="flex flex-wrap gap-4 text-sm">
+        {
+          links.map((l) => (
+            <li>
+              <a href={l.href} class="no-underline hover:underline">
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>

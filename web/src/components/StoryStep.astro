@@ -1,0 +1,25 @@
+---
+/** One step of the scroll story: text on the left, a chart or map on the right (Foodscapes layout). */
+interface Props {
+  id: string;
+  kicker: string;
+  title: string;
+}
+
+const { id, kicker, title } = Astro.props;
+---
+
+<section aria-labelledby={id} class="px-6">
+  <div class="mx-auto grid max-w-[1232px] gap-10 border-t border-navy-500/30 py-14 lg:min-h-[720px] lg:grid-cols-12 lg:items-center lg:gap-6 lg:py-24">
+    <div class="flex flex-col gap-6 lg:col-span-5 xl:col-span-4 xl:col-start-2">
+      <span class="text-xs font-bold tracking-widest uppercase">{kicker}</span>
+      <h2 id={id} class="font-display text-4xl lg:text-[2.75rem] lg:leading-[3.25rem]">{title}</h2>
+      <div class="flex flex-col gap-4 font-light [&_strong]:font-semibold">
+        <slot name="text" />
+      </div>
+    </div>
+    <div class="min-w-0 lg:col-span-6 lg:col-start-7 xl:col-span-5 xl:col-start-7">
+      <slot />
+    </div>
+  </div>
+</section>

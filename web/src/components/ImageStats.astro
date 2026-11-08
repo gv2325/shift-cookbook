@@ -1,0 +1,34 @@
+---
+interface Stat {
+  label: string;
+  value: string;
+  note: string;
+}
+
+interface Props {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  credit: string;
+  stats: Stat[];
+}
+
+const { src, alt, width, height, credit, stats } = Astro.props;
+---
+
+<figure class="m-0 flex flex-col gap-4">
+  <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" class="block h-auto w-full bg-white" />
+  <div class="grid grid-cols-2 gap-px border border-navy-500 bg-navy-500">
+    {
+      stats.map((s) => (
+        <div class="flex flex-col gap-1 bg-white p-4">
+          <span class="text-xs font-bold uppercase">{s.label}</span>
+          <span class="font-display text-3xl">{s.value}</span>
+          <span class="text-sm font-light">{s.note}</span>
+        </div>
+      ))
+    }
+  </div>
+  <figcaption class="text-xs font-light">{credit}</figcaption>
+</figure>

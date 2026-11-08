@@ -1,0 +1,133 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import StoryStep from '../components/StoryStep.astro';
+import Dumbbell from '../components/charts/Dumbbell.astro';
+import MultiplierBars from '../components/charts/MultiplierBars.astro';
+import WidthShare from '../components/charts/WidthShare.astro';
+import ImageStats from '../components/ImageStats.astro';
+import NumberPairs from '../components/NumberPairs.astro';
+import Outro from '../components/Outro.astro';
+import Footer from '../components/Footer.astro';
+import { IMAGES, PEAK_TIER1, PEAK_TIER2, ROAD_WIDTH_TIER1 } from '../data/story';
+
+const RACE_T1 = 'Source: SHIFT peak-hour travel time race, Tier 1.';
+const RACE_T2 = 'Source: SHIFT peak-hour travel time race, Tier 2.';
+---
+
+<Base
+  title="SHIFT: Streets that move cities"
+  description="Why Indian cities need reliable travel times, a missing middle layer of roads, and better-connected street networks. An open transport cookbook for planners and researchers."
+>
+  <Header />
+  <main id="main">
+    <Hero />
+
+    <section id="how" aria-labelledby="how-h" class="scroll-mt-4 px-6">
+      <div class="mx-auto grid max-w-[1232px] gap-10 py-20 lg:grid-cols-12 lg:items-center lg:gap-6 lg:py-32">
+        <div class="flex flex-col gap-6 lg:col-span-6 xl:col-span-5 xl:col-start-2">
+          <h2 id="how-h" class="font-display text-4xl lg:text-5xl lg:leading-[3.5rem]">Travel time is unreliable.</h2>
+          <p class="text-lg font-semibold">The problem is not only congestion. It is unpredictability.</p>
+          <p class="font-light">
+            A good transport system isn’t one where cars move fastest. It’s one where people, buses, deliveries and emergency
+            services can <strong class="font-semibold">reach their destination reliably</strong>.
+          </p>
+          <p class="font-light">
+            The real test isn’t how fast vehicles move, but <strong class="font-semibold">whether people can predict when they’ll arrive.</strong>
+          </p>
+        </div>
+        <div class="min-w-0 lg:col-span-5 lg:col-start-8">
+          <Dumbbell title="Free flow vs peak hour" subtitle="Average speed in km/h, Tier 1 cities" rows={PEAK_TIER1} source={RACE_T1} />
+        </div>
+      </div>
+    </section>
+
+    <StoryStep id="s-trip" kicker="Travel time · Tier 1 cities" title="A 20-minute trip becomes a 45-minute trip.">
+      <Fragment slot="text">
+        <p>During peak hours, large metros can lose up to two-thirds of their speed. <strong>Bengaluru falls from 38 km/h to 13 km/h</strong>, and Mumbai from 40 to 13.</p>
+        <p>That shrinks the area people can reach in the same time, <strong>limiting access to jobs, services and education.</strong></p>
+      </Fragment>
+      <MultiplierBars rows={PEAK_TIER1} source={`${RACE_T1} Multiplier = peak-hour travel time ÷ free-flow travel time.`} />
+    </StoryStep>
+
+    <StoryStep id="s-tier2" kicker="Travel time · Tier 2 cities" title="Smaller cities still have a window.">
+      <Fragment slot="text">
+        <p>Tier 2 cities keep more consistent speeds than the metros. <strong>Thrissur’s peak-hour trip takes 1.8× its free-flow time; Jaipur’s takes 2.7×.</strong></p>
+        <p>Early signs of peak-hour stress point to <strong>a narrowing window to act</strong> before growth locks in worse congestion.</p>
+      </Fragment>
+      <Dumbbell title="Free flow vs peak hour" subtitle="Average speed in km/h, Tier 2 cities" rows={PEAK_TIER2} source={RACE_T2} />
+    </StoryStep>
+
+    <StoryStep id="s-demand" kicker="Travel time · Jaipur vs Coimbatore" title="When network strength isn’t enough.">
+      <Fragment slot="text">
+        <p>Jaipur has a stronger road network than Coimbatore, <strong>but higher demand shrinks its 15-minute reach further</strong> in the evening peak.</p>
+        <p>Network design matters, but demand decides how well that network performs at peak.</p>
+      </Fragment>
+      <ImageStats
+        {...IMAGES.jaipurCoimbatore}
+        stats={[
+          { label: 'Jaipur, 7 PM', value: '33.2 km²', note: 'down from 115.7 at 3 AM' },
+          { label: 'Coimbatore, 7 PM', value: '35.9 km²', note: 'down from 91.6 at 3 AM' },
+        ]}
+      />
+    </StoryStep>
+
+    <StoryStep id="s-hierarchy" kicker="Road hierarchy" title="The missing middle layer.">
+      <Fragment slot="text">
+        <p>Most Indian streets are narrow, and that’s the problem. <strong>In Hyderabad, 95% of road length is under 10 m wide.</strong></p>
+        <p>Without secondary roads, traffic piles onto a few arterials. <strong>Mumbai has the most secondary roads of any Tier 1 city</strong>, about 35% of its network.</p>
+        <p>Cities should complete their networks before widening arterials.</p>
+      </Fragment>
+      <WidthShare rows={ROAD_WIDTH_TIER1} source="Source: SHIFT road width category share, Tier 1." />
+    </StoryStep>
+
+    <StoryStep id="s-connectivity" kicker="Connectivity" title="Connectivity is more than road density.">
+      <Fragment slot="text">
+        <p>A dense road network is not necessarily a connected one. <strong>It’s easier to cross the Yamuna in Delhi than the Hooghly in Kolkata.</strong></p>
+        <p>Thrissur and Nagpur have similarly dense roads, but <strong>Nagpur bridges its railway far more often</strong>, so people travel more directly.</p>
+      </Fragment>
+      <NumberPairs
+        source="Figures quoted in the story."
+        pairs={[
+          {
+            question: 'Share of the area within a 7.5 km radius that a 7.5 km drive actually reaches',
+            items: [{ value: '65%', city: 'Delhi' }, { value: '59%', city: 'Kolkata' }],
+          },
+          {
+            question: 'Distance between road links across the city’s railway corridor',
+            items: [{ value: '0.7 km', city: 'Nagpur' }, { value: '~1 km', city: 'Thrissur' }],
+          },
+        ]}
+      />
+    </StoryStep>
+
+    <StoryStep id="s-density" kicker="Density · Bengaluru" title="Density isn’t the same as connectivity.">
+      <Fragment slot="text">
+        <p>Two Bengaluru neighbourhoods, 3 km apart as the crow flies. <strong>From Whitefield the trip is over 50% longer</strong> because of missing links.</p>
+        <p>Completing short, strategic connections often does more for mobility than adding road length.</p>
+      </Fragment>
+      <ImageStats
+        {...IMAGES.bengaluru}
+        stats={[
+          { label: 'Basavanagudi', value: '400 m', note: 'detour on a 3.4 km trip' },
+          { label: 'Whitefield', value: '1,700 m', note: 'detour on a 4.7 km trip' },
+        ]}
+      />
+    </StoryStep>
+
+    <section aria-labelledby="end-h" class="px-6">
+      <div class="mx-auto grid max-w-[1232px] border-t border-navy-500/30 py-28 lg:grid-cols-12 lg:py-40">
+        <div class="flex flex-col items-center gap-6 text-center lg:col-span-8 lg:col-start-3">
+          <h2 id="end-h" class="font-display text-3xl lg:text-5xl lg:leading-[3.5rem]">
+            Better mobility isn’t about adding more roads. It’s about networks that are complete, connected and direct.
+          </h2>
+          <p class="text-base font-bold tracking-widest uppercase lg:text-xl">That’s the shift Indian cities need now.</p>
+        </div>
+      </div>
+    </section>
+
+    <Outro />
+  </main>
+  <Footer />
+</Base>

@@ -1,0 +1,58 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens follow the Foodscapes explore-map client (Vizzuality / TNC):
+ * navy ink, five pastel ramps, Public Sans for text and Domine for display.
+ * The default Tailwind palette is cleared so only these colours are available.
+ */
+@theme {
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  --color-navy-500: #1c274a;
+  --color-navy-400: #8d92a4;
+  --color-navy-200: #d2d4db;
+  --color-navy-300: #5c6276; /* text-safe muted navy (6:1 on white) */
+
+  --color-yellow-100: #fcf8e8;
+  --color-yellow-500: #f0dc8b;
+  --color-yellow-700: #e8cc6b;
+  --color-yellow-900: #e2be4c;
+  --color-red-500: #f0a38b;
+  --color-red-700: #e8856b;
+  --color-red-900: #e2684c;
+  --color-green-500: #b7f08b;
+  --color-blue-500: #8be4f0;
+  --color-blue-900: #4ccce2;
+  --color-violet-500: #e2c4ed;
+
+  --font-sans: 'Public Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Domine', Georgia, ui-serif, serif;
+
+  --text-xxs: 0.625rem;
+  --text-xxs--line-height: 1rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white font-sans text-navy-500 antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-navy-500);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}

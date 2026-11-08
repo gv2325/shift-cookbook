@@ -1,0 +1,49 @@
+---
+/**
+ * Free-flow vs peak-hour speed per city, drawn as a dumbbell: one dot per speed, joined by a line.
+ * Rendered to static HTML at build time; no client JavaScript.
+ */
+import type { SpeedRow } from '../../data/story';
+
+interface Props {
+  title: string;
+  subtitle: string;
+  rows: SpeedRow[];
+  source: string;
+  max?: number;
+}
+
+const { title, subtitle, rows, source, max = 50 } = Astro.props;
+const pct = (v: number) => `${(v / max) * 100}%`;
+---
+
+<figure class="m-0 flex flex-col gap-4">
+  <figcaption class="flex flex-col gap-1">
+    <span class="font-display text-2xl">{title}</span>
+    <span class="text-sm font-light">{subtitle}</span>
+  </figcaption>
+
+  <div class="flex gap-5 text-xs font-light">
+    <span class="flex items-center gap-1.5"><span class="h-3 w-3 rounded-full border border-navy-500 bg-blue-900"></span>3 AM, free flow</span>
+    <span class="flex items-center gap-1.5"><span class="h-3 w-3 rounded-full border border-navy-500 bg-red-900"></span>Evening peak</span>
+  </div>
+
+  <ul class="m-0 flex list-none flex-col gap-3 p-0">
+    {
+      rows.map((r) => (
+        <li class="grid grid-cols-[96px_minmax(0,1fr)] items-center gap-3" aria-label={`${r.city}: ${r.free} km/h at free flow, ${r.peak} km/h at the evening peak`}>
+          <span class="text-sm font-light" aria-hidden="true">{r.city}</span>
+          <span class="relative h-5" aria-hidden="true">
+            <span class="absolute top-[9px] h-0.5 bg-navy-500" style={{ left: pct(r.peak), width: pct(r.free - r.peak) }} />
+            <span class="absolute top-[3px] -ml-[7px] h-3.5 w-3.5 rounded-full border border-navy-500 bg-red-900" style={{ left: pct(r.peak) }} />
+            <span class="absolute top-[3px] -ml-[7px] h-3.5 w-3.5 rounded-full border border-navy-500 bg-blue-900" style={{ left: pct(r.free) }} />
+            <span class="absolute top-1 text-xxs leading-3 font-bold" style={{ right: `calc(100% - ${pct(r.peak)} + 12px)` }}>{r.peak}</span>
+            <span class="absolute top-1 text-xxs leading-3 font-bold" style={{ left: `calc(${pct(r.free)} + 12px)` }}>{r.free}</span>
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p class="text-xs font-light">{source}</p>
+</figure>

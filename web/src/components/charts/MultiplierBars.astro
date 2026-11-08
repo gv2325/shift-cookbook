@@ -1,0 +1,38 @@
+---
+/** How many times longer a 1 km drive takes at peak hour than at free flow (free ÷ peak speed). */
+import type { SpeedRow } from '../../data/story';
+
+interface Props {
+  rows: SpeedRow[];
+  source: string;
+}
+
+const { rows, source } = Astro.props;
+const data = rows
+  .map((r) => ({ city: r.city, m: r.free / r.peak }))
+  .sort((a, b) => b.m - a.m);
+const max = Math.max(...data.map((d) => d.m));
+---
+
+<figure class="m-0 flex flex-col gap-4">
+  <figcaption class="flex flex-col gap-1">
+    <span class="font-display text-2xl">How much longer peak hour takes</span>
+    <span class="text-sm font-light">Time to drive 1 km at peak, as a multiple of free flow</span>
+  </figcaption>
+
+  <ul class="m-0 flex list-none flex-col gap-2.5 p-0">
+    {
+      data.map((d) => (
+        <li>
+          <div class="flex items-center gap-1" style={{ width: `${8 + (92 * d.m) / max}%` }}>
+            <span class:list={['h-2 grow border border-navy-500', d.m >= 3 ? 'bg-red-900' : 'bg-red-500']} />
+            <span class="shrink-0 text-xxs leading-3 font-bold">{d.m.toFixed(1)}×</span>
+          </div>
+          <div class="text-sm font-light">{d.city}</div>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p class="text-xs font-light">{source}</p>
+</figure>

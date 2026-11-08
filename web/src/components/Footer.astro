@@ -1,0 +1,22 @@
+---
+import { STORY } from '../data/story';
+---
+
+<footer class="bg-navy-500 px-6 text-white">
+  <div class="mx-auto grid max-w-[1232px] gap-6 py-12 text-sm font-light lg:grid-cols-12">
+    <div class="flex flex-col gap-2 lg:col-span-5 xl:col-start-2">
+      <span class="font-display text-2xl font-normal">SHIFT</span>
+      <span>
+        Story, maps and photographs:
+        <a href={STORY.url} class="text-white">“{STORY.title}”</a>, {STORY.byline}. Views expressed are the authors’ own.
+      </span>
+    </div>
+    <div class="flex flex-col gap-2 lg:col-span-4 lg:col-start-8">
+      <span>An open community cookbook for transport data, inspired by the SHIFT Transport Analytics Hub (WRI India, Mint, Spectrum and Rainmatter Foundation).</span>
+      <span class="flex flex-wrap gap-4">
+        <a href="https://www.shift-transport.org/data-sources" class="text-white">Data sources</a>
+        <a href="https://github.com/gv2325/shift-cookbook" class="text-white">GitHub</a>
+      </span>
+    </div>
+  </div>
+</footer>

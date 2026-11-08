@@ -1,0 +1,50 @@
+---
+/** 100% stacked bars: share of road length by carriageway width band, per city. */
+import { WIDTH_BANDS, type WidthRow } from '../../data/story';
+
+interface Props {
+  rows: WidthRow[];
+  source: string;
+}
+
+const { rows, source } = Astro.props;
+const FILLS = ['bg-navy-200', 'bg-yellow-900', 'bg-red-700', 'bg-navy-500'];
+---
+
+<figure class="m-0 flex flex-col gap-4">
+  <figcaption class="flex flex-col gap-1">
+    <span class="font-display text-2xl">Share of road length by width</span>
+    <span class="text-sm font-light">Tier 1 cities</span>
+  </figcaption>
+
+  <div class="flex flex-wrap gap-x-4 gap-y-1.5 text-xs font-light">
+    {
+      WIDTH_BANDS.map((label, i) => (
+        <span class="flex items-center gap-1.5">
+          <span class:list={['h-2.5 w-2.5 border border-navy-500', FILLS[i]]} />
+          {label}
+        </span>
+      ))
+    }
+  </div>
+
+  <ul class="m-0 flex list-none flex-col gap-3 p-0">
+    {
+      rows.map((r) => (
+        <li class="flex flex-col gap-1">
+          <div class="flex h-3 border border-navy-500" role="img" aria-label={`${r.city}: ${WIDTH_BANDS.map((b, i) => `${b} ${r.shares[i]}%`).join(', ')}`}>
+            {r.shares.map((s, i) => (
+              <span class:list={[FILLS[i], i < 3 && s > 0.4 && 'border-r border-navy-500']} style={{ width: `${s}%` }} />
+            ))}
+          </div>
+          <div class="flex justify-between gap-3 text-sm font-light">
+            <span>{r.city}</span>
+            <span class="text-xxs leading-5 font-bold">{r.shares[0]}% under 10 m</span>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p class="text-xs font-light">{source}</p>
+</figure>
