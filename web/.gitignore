@@ -1,3 +1,6 @@
 node_modules/
 dist/
 .astro/
+
+# Keep source code in src/lib: the repo root .gitignore (Python template) ignores lib/.
+!src/lib/
