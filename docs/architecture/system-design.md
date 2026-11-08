@@ -131,7 +131,7 @@ sequenceDiagram
   participant M as shift-mcp (Node)
   participant T as packages/tools (in-process)
   A->>R: POST /mcp  {"method":"tools/call","params":{"name":"compare_cities",...}}
-  R->>M: forward (wakes instance if free tier and idle, ~60 s)
+  R->>M: forward (Starter instance: always on)
   M->>M: rate limit (per IP) · validate Origin · zod-validate args
   M->>T: compareCities(data, args)
   T-->>M: rows + sources[] + caveats[] + mapLink
@@ -286,9 +286,11 @@ Add a payment method to the Render workspace even at $0. Without one, going over
 
 ### Free instance vs Starter for `shift-mcp`
 
+**Decision (2026-11-08):** Starter. On the free plan, ChatGPT's first visits repeatedly hit the 503 Render returns while a sleeping instance wakes. The switch must be made in the dashboard; Render's API refuses free-to-paid plan changes.
+
 | | Free | Starter ($7) |
 |---|---|---|
-| Idle behaviour | Sleeps after 15 minutes with no traffic | Always on (to verify on Render's plan page) |
+| Idle behaviour | Sleeps after 15 minutes with no traffic | Always on (confirmed: no sleep since the switch on 2026-11-08) |
 | First call after idle | About 60 s. Some MCP clients time out on connect and show the connector as broken. | Under 300 ms |
 | Hours | Uses the workspace's 750 free hours a month | Not counted against free hours |
 | Use it for | Building and private testing | Once the connector link is shared |

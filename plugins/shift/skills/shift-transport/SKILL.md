@@ -33,7 +33,9 @@ If they are not, connect it:
   ```
   The answer is in `result.structuredContent`. Use `"method":"tools/list"` to see every tool and its inputs.
 
-The server sleeps when idle. If the first call fails or returns 502/503, wait 30–60 seconds and try once more.
+  If the call fails with a DNS or network error, your sandbox has no internet access: stop and ask the user to add the connector instead. Opening the URL in a web browser does not work either; MCP needs a connector or a POST.
+
+The server is always on. If a call returns 502/503 (for example during a redeploy), wait a few seconds and try once more.
 
 ## Step 2: answer with the tools
 
