@@ -1,7 +1,7 @@
 ---
 import { STORY } from '../data/story';
 
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const links = [
   { label: 'The story', href: '#how' },
   { label: 'Full StoryMap', href: STORY.url },

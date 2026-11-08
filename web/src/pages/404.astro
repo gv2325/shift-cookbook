@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<Base title="Page not found · SHIFT" description="This page doesn’t exist on SHIFT." noindex>
+  <Header />
+  <main id="main" class="px-6">
+    <div class="mx-auto grid max-w-[1232px] py-32 lg:grid-cols-12 lg:py-48">
+      <div class="flex flex-col gap-6 lg:col-span-6 xl:col-start-2">
+        <p class="text-xs font-bold tracking-widest uppercase">404</p>
+        <h1 class="font-display text-5xl lg:text-6xl">This street doesn’t connect.</h1>
+        <p class="font-light">The page you were looking for isn’t here. It may have moved while the cookbook is being built.</p>
+        <a href={base} class="self-start bg-navy-500 px-4 py-2 text-xs font-bold text-white uppercase no-underline">Back to the start</a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Base>

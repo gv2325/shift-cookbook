@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="10" fill="#1c274a"/>
+  <rect x="10" y="46" width="44" height="6" fill="#f0dc8b"/>
+  <text x="32" y="40" text-anchor="middle" font-family="Domine, Georgia, 'Times New Roman', serif" font-size="38" fill="#ffffff">S</text>
+</svg>

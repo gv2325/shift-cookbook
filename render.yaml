@@ -1,0 +1,67 @@
+# yaml-language-server: $schema=https://render.com/schema/render.yaml.json
+#
+# Render Blueprint for the SHIFT Cookbook website (static Astro build from web/).
+#
+# Placement: this service belongs in the existing Render project "wri", environment "dev".
+# It is declared at the root (not under `projects:`) on purpose: Render's docs don't say whether
+# a Blueprint that names an existing project attaches to it or creates a second one, while
+# root-level services keep whatever project/environment they're already in. So after the first
+# sync, move the service into wri › dev once in the dashboard (see README), or create it there
+# first with the same name and let the Blueprint sync onto it.
+#
+# The MCP service (shift-mcp) will be added here later; see docs/architecture/system-design.md.
+
+previews:
+  generation: automatic # Pro plan: a preview site for every pull request
+  expireAfterDays: 7
+
+services:
+  - type: web
+    runtime: static
+    name: shift-cookbook-web
+    # Build from the repo root (no rootDir) so the publish path is unambiguous.
+    buildCommand: cd web && npm ci && npm run build
+    staticPublishPath: web/dist
+    autoDeployTrigger: commit
+    buildFilter:
+      paths:
+        - web/**
+        - render.yaml
+      ignoredPaths:
+        - web/README.md
+    previews:
+      generation: automatic
+    envVars:
+      - key: NODE_VERSION
+        value: 22.23.4
+      # Canonical/Open Graph URLs fall back to Render's RENDER_EXTERNAL_URL (also correct on
+      # preview sites). Set SITE_URL here once a custom domain is attached.
+      # - key: SITE_URL
+      #   value: https://shift.example.org
+    headers:
+      # Hashed build assets never change: cache for a year.
+      - path: /_astro/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /og.png
+        name: Cache-Control
+        value: public, max-age=86400
+      - path: /favicon.svg
+        name: Cache-Control
+        value: public, max-age=86400
+      # Security headers for every response.
+      - path: /*
+        name: Content-Security-Policy
+        value: "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.arcgis.com; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: Permissions-Policy
+        value: camera=(), microphone=(), geolocation=(), interest-cohort=()
+      - path: /*
+        name: X-Frame-Options
+        value: DENY

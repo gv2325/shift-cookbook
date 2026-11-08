@@ -211,7 +211,7 @@ Rules every tool follows:
 
 ### Draft Blueprint (`render.yaml`)
 
-Field names to be checked against Render's Blueprint reference before merging:
+The repository's [`render.yaml`](../../render.yaml) now defines the static site, as `shift-cookbook-web`. It is validated against Render's official schema (`https://render.com/schema/render.yaml.json`) and deploys into the `wri` project, `dev` environment. The block below is the target once the MCP service is added. Two things differ from the live file: it builds with `cd web && …` and publishes `web/dist` rather than using `rootDir`, and it keeps services at the root rather than under `projects:` (see the comments in `render.yaml`).
 
 ```yaml
 services:

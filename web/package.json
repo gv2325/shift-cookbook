@@ -3,7 +3,10 @@
   "private": true,
   "type": "module",
   "version": "0.1.0",
-  "description": "SHIFT Cookbook website: landing page (static, GitHub Pages).",
+  "description": "SHIFT Cookbook website: landing page (static, deployed on Render).",
+  "engines": {
+    "node": ">=22.23.4 <25"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",
