@@ -1,0 +1,10 @@
+{
+  "name": "shift",
+  "version": "0.1.0",
+  "description": "SHIFT Cookbook connector and skill: transit, modal share, road traffic and road safety data for 20 Indian cities, with a source on every number.",
+  "author": { "name": "gv2325" },
+  "homepage": "https://shift-cookbook-web.onrender.com/connect",
+  "repository": "https://github.com/gv2325/shift-cookbook",
+  "license": "Unlicense",
+  "keywords": ["transport", "mobility", "india", "cities", "mcp"]
+}

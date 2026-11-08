@@ -2,20 +2,27 @@
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+// Written by scripts/build-skill.mjs (runs before dev/build) from plugins/shift/ at the repo root,
+// which is the skill's single source of truth.
+import SKILL_MD from '../../public/downloads/SKILL.md?raw';
 
 const MCP_URL = import.meta.env.PUBLIC_MCP_URL ?? 'https://shift-cookbook-mcp.onrender.com/mcp';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+// Tested with the Claude Code CLI: both install the plugin and its connector reports "Connected".
+const PLUGIN_ONE_STEP = '/plugin install shift --marketplace gv2325/shift-cookbook';
+const PLUGIN_CMDS = ['claude plugin marketplace add gv2325/shift-cookbook', 'claude plugin install shift@shift-cookbook'];
 
 const apps = [
   {
     name: 'Claude',
     steps: [
-      'Open Settings, then Connectors.',
+      'Open Customize, then Connectors (claude.ai/customize/connectors).',
       'Choose Add custom connector. Name it SHIFT and paste the connector link.',
       'Leave the OAuth fields empty: SHIFT needs no sign-in. Select Add.',
       'In a chat, turn SHIFT on from the tools menu and ask away.',
     ],
-    note: 'Available on Claude plans that support custom connectors. Menu names may differ slightly between web, desktop and mobile.',
+    note: 'On Team and Enterprise plans an admin may need to add it. Menu names may differ slightly between web, desktop and mobile.',
   },
   {
     name: 'ChatGPT',
@@ -104,6 +111,72 @@ const prompts = [
         <p class="text-sm font-light lg:col-span-10 xl:col-start-2">
           Using Claude Code? Run <code class="bg-yellow-100 px-1.5 py-0.5 font-mono text-[0.85em]">claude mcp add --transport http shift {MCP_URL}</code>
         </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="skill-h" class="px-6">
+      <div class="mx-auto grid max-w-[1232px] gap-10 border-t border-navy-500/30 py-20 lg:grid-cols-12 lg:gap-6">
+        <div class="flex flex-col gap-4 lg:col-span-5 xl:col-span-4 xl:col-start-2">
+          <h2 id="skill-h" class="font-display text-4xl">Or copy the skill.</h2>
+          <p class="font-light">
+            The SHIFT skill teaches Claude what the connector can do and how to cite it. In Claude Code it also links the connector for you, in one
+            command.
+          </p>
+          <p class="text-sm font-light">
+            Want to read it first? <a href={`${base}downloads/SKILL.md`}>View SKILL.md</a> or see it in{' '}
+            <a href="https://github.com/gv2325/shift-cookbook/tree/main/plugins/shift">the repository</a>.
+          </p>
+        </div>
+        <ol class="m-0 flex list-none flex-col gap-8 p-0 lg:col-span-6 lg:col-start-7 xl:col-span-5 xl:col-start-7">
+          <li class="flex flex-col gap-3">
+            <h3 class="font-display text-2xl">Claude Code</h3>
+            <p class="font-light">Paste this into Claude Code. It installs a small plugin that adds the SHIFT connector and the skill together.</p>
+            {
+              [PLUGIN_ONE_STEP].map((cmd) => (
+                <div class="flex items-stretch border border-navy-500">
+                  <code class="grow bg-white px-3 py-2.5 font-mono text-sm break-all">{cmd}</code>
+                  <button type="button" data-copy={cmd} class="shrink-0 bg-navy-500 px-3 text-xs font-bold text-white uppercase hover:bg-navy-400 hover:text-navy-500" aria-label={`Copy: ${cmd}`}>
+                    Copy
+                  </button>
+                </div>
+              ))
+            }
+            <p class="text-sm font-light">On Claude Code older than 2.1.275, run these two in your terminal instead:</p>
+            {
+              PLUGIN_CMDS.map((cmd) => (
+                <div class="flex items-stretch border border-navy-500">
+                  <code class="grow bg-white px-3 py-2.5 font-mono text-sm break-all">{cmd}</code>
+                  <button type="button" data-copy={cmd} class="shrink-0 bg-navy-500 px-3 text-xs font-bold text-white uppercase hover:bg-navy-400 hover:text-navy-500" aria-label={`Copy: ${cmd}`}>
+                    Copy
+                  </button>
+                </div>
+              ))
+            }
+          </li>
+          <li class="flex flex-col gap-3">
+            <h3 class="font-display text-2xl">Claude.ai and Claude Desktop</h3>
+            <p class="font-light">
+              Download the skill, then in Claude open Customize → Skills, choose + → Create skill → Upload a skill, and pick the zip. Skills need code execution turned on. Then add the connector (above) so the skill has data to use.
+            </p>
+            <a href={`${base}downloads/shift-transport.zip`} download class="self-start bg-navy-500 px-4 py-2 text-xs font-bold text-white uppercase no-underline hover:bg-navy-400 hover:text-navy-500">
+              Download shift-transport.zip
+            </a>
+          </li>
+          <li class="flex flex-col gap-3">
+            <h3 class="font-display text-2xl">Any other assistant</h3>
+            <p class="font-light">
+              Copy the skill and paste it into a chat or a project’s instructions. Assistants that can run code can call the connector directly, even
+              without adding it.
+            </p>
+            <button type="button" data-copy={SKILL_MD} class="self-start rounded-3xl border border-navy-500 bg-white px-3 py-1 text-xs font-bold uppercase hover:bg-navy-500 hover:text-white">
+              Copy the skill
+            </button>
+            <details class="border border-navy-200">
+              <summary class="cursor-pointer px-3 py-2 text-sm font-semibold">Show the skill</summary>
+              <pre class="m-0 max-h-96 overflow-auto bg-yellow-100 p-3 font-mono text-xs leading-5 whitespace-pre-wrap">{SKILL_MD}</pre>
+            </details>
+          </li>
+        </ol>
       </div>
     </section>
 

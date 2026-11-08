@@ -1,0 +1,12 @@
+{
+  "name": "shift-cookbook",
+  "description": "SHIFT Cookbook: open transport data for 20 Indian cities, for Claude Code.",
+  "owner": { "name": "gv2325" },
+  "plugins": [
+    {
+      "name": "shift",
+      "source": "./plugins/shift",
+      "description": "Adds the SHIFT MCP connector (read-only, no sign-in) and a skill for answering questions about transit, traffic and road safety in Indian cities with cited sources."
+    }
+  ]
+}

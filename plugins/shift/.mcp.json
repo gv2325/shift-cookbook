@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "shift": {
+      "type": "http",
+      "url": "https://shift-cookbook-mcp.onrender.com/mcp"
+    }
+  }
+}

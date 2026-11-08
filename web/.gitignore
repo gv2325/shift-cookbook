@@ -4,3 +4,6 @@ dist/
 
 # Keep source code in src/lib: the repo root .gitignore (Python template) ignores lib/.
 !src/lib/
+
+# Generated from plugins/shift/ by scripts/build-skill.mjs
+public/downloads/

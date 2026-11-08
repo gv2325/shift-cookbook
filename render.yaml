@@ -27,6 +27,7 @@ services:
     buildFilter:
       paths:
         - web/**
+        - plugins/** # the skill on /connect is packaged from the Claude Code plugin
         - render.yaml
       ignoredPaths:
         - web/README.md

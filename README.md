@@ -39,7 +39,19 @@ A public, read-only [MCP](https://modelcontextprotocol.io) server so Claude and 
 - Tools: `list_cities`, `list_indicators`, `get_indicator`, `compare_cities`, `get_map_link`, and `search` + `fetch` (the pair ChatGPT deep research needs). Every result carries `sources`, `caveats` (missing data, conflicting SHIFT figures, licence notes) and a `map_link`.
 - It imports `web/src/lib/indicators.ts` and `web/src/data/cities.json` directly (bundled by esbuild), so the connector and the map can't drift apart.
 - Guardrails: 60 requests per minute per IP, 64 KB request limit, 10 s timeout, Origin allowlist (requests without an Origin, i.e. server-to-server, are allowed). Logs hold the tool name, status, timing and a salted IP hash, never arguments.
-- `/connect` on the website explains how to add it in Claude, ChatGPT and Claude Code.
+- `/connect` on the website explains how to add it in Claude, ChatGPT and Claude Code, and offers the SHIFT skill to copy or download.
+
+### Claude Code plugin and skill (`plugins/shift/`, `.claude-plugin/marketplace.json`)
+
+This repository is also a Claude Code plugin marketplace. The `shift` plugin bundles the connector (`.mcp.json`) and the `shift-transport` skill, so one command links everything:
+
+```text
+/plugin install shift --marketplace gv2325/shift-cookbook
+```
+
+Older Claude Code versions: `claude plugin marketplace add gv2325/shift-cookbook`, then `claude plugin install shift@shift-cookbook`. Claude Code reads the marketplace from the repository's default branch.
+
+`plugins/shift/skills/shift-transport/SKILL.md` is the single source for the skill: the website build (`web/scripts/build-skill.mjs`) copies it to `/downloads/SKILL.md` and zips it as `/downloads/shift-transport.zip` for Claude.ai (Customize → Skills → upload).
 
 ```bash
 cd mcp
