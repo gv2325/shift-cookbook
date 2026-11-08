@@ -1,0 +1,181 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const MCP_URL = import.meta.env.PUBLIC_MCP_URL ?? 'https://shift-cookbook-mcp.onrender.com/mcp';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const apps = [
+  {
+    name: 'Claude',
+    steps: [
+      'Open Settings, then Connectors.',
+      'Choose Add custom connector. Name it SHIFT and paste the connector link.',
+      'Leave the OAuth fields empty: SHIFT needs no sign-in. Select Add.',
+      'In a chat, turn SHIFT on from the tools menu and ask away.',
+    ],
+    note: 'Available on Claude plans that support custom connectors. Menu names may differ slightly between web, desktop and mobile.',
+  },
+  {
+    name: 'ChatGPT',
+    steps: [
+      'Open Settings, Apps & Connectors, Advanced settings, and turn on Developer mode.',
+      'Select Create. Name it SHIFT and paste the connector link.',
+      'Set Authentication to No authentication, confirm you trust it, then select Create.',
+      'In a chat, add SHIFT from the Developer mode tools. Deep research can use it too, through search and fetch.',
+    ],
+    note: 'Developer mode depends on your ChatGPT plan. In workspaces an admin may need to enable it first.',
+  },
+];
+
+const tools = [
+  ['List cities', 'The 20 cities in SHIFT, their population, and which figures exist for each.'],
+  ['List indicators', 'Definitions, units, sources and benchmarks for every indicator.'],
+  ['Look up a figure', 'One value for one city, with its source and any caveats, such as missing data or SHIFT tables that disagree.'],
+  ['Compare cities', 'A ranked table for up to ten cities, or all twenty, on any indicator.'],
+  ['Search and read', 'City profiles, indicator rankings and the “Streets That Move Cities” story, in the form ChatGPT deep research expects.'],
+  ['Open the map', 'A link that opens this site’s map with the same cities and indicator.'],
+];
+
+const prompts = [
+  { text: 'Using SHIFT, compare buses per million residents in Pune, Bengaluru and Chennai against the national benchmark, and cite the sources.', bg: 'bg-yellow-500' },
+  { text: 'Which SHIFT city has the highest share of trips by walking, cycling and public transport? Note how old each mobility plan is.', bg: 'bg-green-500' },
+  { text: 'Rank all SHIFT cities by road deaths per million residents and give me a map link for the top four.', bg: 'bg-red-500' },
+];
+---
+
+<Base
+  title="Use SHIFT in Claude or ChatGPT · SHIFT"
+  description="Connect Claude or ChatGPT to SHIFT’s transport data for 20 Indian cities with one link. Read-only, no sign-in, every number cited."
+>
+  <Header />
+  <main id="main">
+    <section class="px-6">
+      <div class="mx-auto grid max-w-[1232px] gap-10 py-20 lg:grid-cols-12 lg:gap-6 lg:py-28">
+        <div class="flex flex-col gap-6 lg:col-span-6 xl:col-span-5 xl:col-start-2">
+          <h1 class="font-display text-5xl lg:text-[3.5rem] lg:leading-[4rem]">Ask SHIFT from Claude or ChatGPT.</h1>
+          <p class="font-light">
+            Add one link to your AI assistant and it can look up transit, traffic and road-safety figures for 20 Indian cities, compare them, and send you
+            back to <a href={`${base}map`}>the map</a>. Every number comes with its source.
+          </p>
+          <p class="font-light">There is nothing to sign up for. The connector only reads public SHIFT data and can’t change anything.</p>
+        </div>
+        <div class="flex flex-col gap-4 self-center bg-violet-500 p-8 lg:col-span-5 lg:col-start-8 xl:col-span-4 xl:col-start-8 xl:p-10">
+          <h2 class="border-b border-navy-500/30 pb-4 text-xl font-medium">Connector link</h2>
+          <code id="mcp-url" class="block border border-navy-500 bg-white px-3.5 py-3 font-mono text-sm break-all">{MCP_URL}</code>
+          <button
+            type="button"
+            data-copy={MCP_URL}
+            class="self-start bg-navy-500 px-4 py-2 text-xs font-bold text-white uppercase hover:bg-navy-400 hover:text-navy-500"
+          >
+            Copy link
+          </button>
+          <ul class="m-0 flex list-none flex-wrap gap-2 p-0 pt-2" aria-label="About this connector">
+            <li class="rounded-3xl bg-white px-2.5 py-1 text-xs font-bold uppercase">Read-only</li>
+            <li class="rounded-3xl bg-white px-2.5 py-1 text-xs font-bold uppercase">No sign-in</li>
+            <li class="rounded-3xl bg-white px-2.5 py-1 text-xs font-bold uppercase">Free</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="setup-h" class="px-6">
+      <div class="mx-auto grid max-w-[1232px] gap-10 pb-24 lg:grid-cols-12 lg:gap-6">
+        <h2 id="setup-h" class="font-display text-4xl lg:col-span-10 xl:col-start-2">Two ways in.</h2>
+        {
+          apps.map((a, i) => (
+            <div class:list={['flex flex-col gap-5 border-t border-navy-500/30 pt-8 lg:col-span-6 xl:col-span-5', i === 0 ? 'xl:col-start-2' : 'xl:col-start-7']}>
+              <h3 class="font-display text-2xl">{a.name}</h3>
+              <ol class="m-0 flex list-none flex-col gap-4 p-0">
+                {a.steps.map((s, n) => (
+                  <li class="grid grid-cols-[32px_minmax(0,1fr)] gap-3">
+                    <span class="font-display text-xl leading-6" aria-hidden="true">
+                      {n + 1}
+                    </span>
+                    <span class="font-light">{s}</span>
+                  </li>
+                ))}
+              </ol>
+              <p class="text-xs font-light italic">{a.note}</p>
+            </div>
+          ))
+        }
+        <p class="text-sm font-light lg:col-span-10 xl:col-start-2">
+          Using Claude Code? Run <code class="bg-yellow-100 px-1.5 py-0.5 font-mono text-[0.85em]">claude mcp add --transport http shift {MCP_URL}</code>
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="tools-h" class="bg-yellow-100 px-6">
+      <div class="mx-auto grid max-w-[1232px] gap-10 py-24 lg:grid-cols-12 lg:gap-6">
+        <div class="flex flex-col gap-4 lg:col-span-5 xl:col-span-4 xl:col-start-2">
+          <h2 id="tools-h" class="font-display text-4xl">What your assistant can do.</h2>
+          <p class="font-light">The connector uses the same data and definitions as the map, so an answer in Claude or ChatGPT matches what you see here.</p>
+        </div>
+        <ul class="m-0 list-none p-0 lg:col-span-6 lg:col-start-7 xl:col-span-5 xl:col-start-7">
+          {
+            tools.map(([label, desc]) => (
+              <li class="flex flex-col gap-0.5 border-t border-navy-500/30 py-4">
+                <span class="font-semibold">{label}</span>
+                <span class="font-light">{desc}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section aria-labelledby="ask-h" class="px-6">
+      <div class="mx-auto grid max-w-[1232px] gap-6 py-24 lg:grid-cols-12">
+        <h2 id="ask-h" class="font-display text-4xl lg:col-span-10 xl:col-start-2">Try asking.</h2>
+        {
+          prompts.map((p, i) => (
+            <div class:list={['flex flex-col justify-between gap-6 p-8 lg:col-span-4', p.bg, i === 0 ? 'xl:col-span-4 xl:col-start-2' : 'xl:col-span-3']}>
+              <p class="font-display text-xl leading-7">{p.text}</p>
+              <button type="button" data-copy={p.text} class="self-start rounded-3xl bg-white px-3 py-1 text-xs font-bold uppercase hover:bg-navy-500 hover:text-white">
+                Copy prompt
+              </button>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section aria-label="Good to know" class="border-b border-white/20 bg-navy-500 px-6 text-white">
+      <div class="mx-auto grid max-w-[1232px] gap-6 py-12 text-sm font-light lg:grid-cols-12">
+        <p class="lg:col-span-5 xl:col-start-2">
+          The connector runs on a free server that sleeps when idle. The first question after a quiet spell can take up to a minute; if your assistant
+          times out, ask again.
+        </p>
+        <p class="lg:col-span-4 lg:col-start-8">
+          We log which tool was used and when, with a hashed network address, to keep the service fair. We never store your questions. Limit: 60 requests
+          a minute.
+        </p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>
+
+<p id="copy-status" role="status" aria-live="polite" class="sr-only"></p>
+
+<script>
+  // Copy buttons. Bundled (not inline) so the Content-Security-Policy can keep script-src 'self'.
+  const status = document.getElementById('copy-status');
+  document.querySelectorAll<HTMLButtonElement>('button[data-copy]').forEach((btn) => {
+    const label = btn.textContent?.trim() ?? 'Copy';
+    btn.addEventListener('click', async () => {
+      const value = btn.dataset.copy ?? '';
+      try {
+        await navigator.clipboard.writeText(value);
+        btn.textContent = 'Copied';
+        if (status) status.textContent = 'Copied to clipboard';
+      } catch {
+        btn.textContent = 'Select and copy';
+        if (status) status.textContent = 'Copying is blocked in this browser. Select the text and copy it instead.';
+      }
+      setTimeout(() => (btn.textContent = label), 2000);
+    });
+  });
+</script>

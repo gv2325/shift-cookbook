@@ -1,15 +1,16 @@
 # yaml-language-server: $schema=https://render.com/schema/render.yaml.json
 #
-# Render Blueprint for the SHIFT Cookbook website (static Astro build from web/).
+# Render Blueprint for SHIFT Cookbook: the website (static Astro build from web/) and the
+# MCP connector (Node service from mcp/). Both live in the Render project "wri", environment "dev".
 #
-# Placement: this service belongs in the existing Render project "wri", environment "dev".
-# It is declared at the root (not under `projects:`) on purpose: Render's docs don't say whether
+# Placement: these services belong in the existing Render project "wri", environment "dev".
+# They are declared at the root (not under `projects:`) on purpose: Render's docs don't say whether
 # a Blueprint that names an existing project attaches to it or creates a second one, while
 # root-level services keep whatever project/environment they're already in. So after the first
-# sync, move the service into wri › dev once in the dashboard (see README), or create it there
+# sync, move the services into wri › dev once in the dashboard (see README), or create it there
 # first with the same name and let the Blueprint sync onto it.
 #
-# The MCP service (shift-mcp) will be added here later; see docs/architecture/system-design.md.
+# Architecture, costs and trade-offs: docs/architecture/system-design.md.
 
 previews:
   generation: automatic # Pro plan: a preview site for every pull request
@@ -34,6 +35,9 @@ services:
     envVars:
       - key: NODE_VERSION
         value: 22.23.4
+      # Shown on /connect as the link people paste into Claude or ChatGPT.
+      - key: PUBLIC_MCP_URL
+        value: https://shift-cookbook-mcp.onrender.com/mcp
       # Canonical/Open Graph URLs fall back to Render's RENDER_EXTERNAL_URL (also correct on
       # preview sites). Set SITE_URL here once a custom domain is attached.
       # - key: SITE_URL
@@ -66,3 +70,30 @@ services:
       - path: /*
         name: X-Frame-Options
         value: DENY
+
+  # MCP connector: stateless, read-only Streamable HTTP at POST /mcp (no sign-in).
+  - type: web
+    runtime: node
+    name: shift-cookbook-mcp
+    # Free while testing; switch to `starter` ($7/month, no 15-minute sleep) before sharing widely.
+    plan: free
+    region: oregon # Claude and ChatGPT call connectors from their own (US) servers
+    buildCommand: cd mcp && npm ci && npm run build
+    startCommand: node mcp/dist/server.js
+    healthCheckPath: /healthz
+    autoDeployTrigger: commit
+    buildFilter:
+      paths:
+        - mcp/**
+        - web/src/lib/**
+        - web/src/data/**
+        - render.yaml
+    envVars:
+      - key: NODE_VERSION
+        value: 22.23.4
+      - key: SITE_URL
+        value: https://shift-cookbook-web.onrender.com
+      - key: ALLOWED_ORIGINS
+        value: https://shift-cookbook-web.onrender.com,https://claude.ai,https://chatgpt.com,https://chat.openai.com
+      - key: IP_HASH_SALT
+        generateValue: true

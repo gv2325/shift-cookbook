@@ -224,6 +224,9 @@ export default function MapView({ selected, metric, onToggle, sidebarOpen, onTog
               <a href={`${BASE}map`} aria-current="page" class="text-white underline underline-offset-4">
                 Explore map
               </a>
+              <a href={`${BASE}connect`} class="text-white no-underline hover:underline">
+                Use with Claude or ChatGPT
+              </a>
             </nav>
           )}
         </div>

@@ -8,6 +8,7 @@ an open community cookbook for all things transport related, inspired by wri shi
 | `docs/spec/PRD.md` | Product spec: static cookbook, MapLibre map with an in-browser SLM, and an MCP endpoint for Claude and ChatGPT |
 | `docs/architecture/system-design.md` | How the site and the MCP endpoint run on Render |
 | `web/` | The website (Astro, static output): the landing page and the explore map at `/map` |
+| `mcp/` | The MCP connector for Claude and ChatGPT (Node, stateless Streamable HTTP at `POST /mcp`) |
 | `pipeline/shift_hub/` | Scripts that rebuild `web/src/data/cities.json` from the SHIFT hub's published bundle |
 | `render.yaml` | Render Blueprint for the website (static site with security and cache headers) |
 | `.github/workflows/web-ci.yml` | Type-checks and builds `web/` on pull requests; Render does the deploying |
@@ -29,6 +30,24 @@ A MapLibre map of the 20 Indian SHIFT cities with a Foodscapes-style sidebar: Tr
 - Data: `web/src/data/cities.json`, extracted from the SHIFT hub (see `pipeline/shift_hub/`). Zeros there are shown as “no data”, and where SHIFT's two tables disagree, both values are listed under “Where SHIFT’s sources disagree”.
 - The indicator logic in `web/src/lib/indicators.ts` has no UI code, so the planned MCP server can reuse it.
 - India's boundary comes from OpenStreetMap via OpenFreeMap. An official Survey of India boundary is needed before publishing widely in India.
+
+## MCP connector (`mcp/`) and the Connect page (`/connect`)
+
+A public, read-only [MCP](https://modelcontextprotocol.io) server so Claude and ChatGPT can query the same data as the map. No sign-in.
+
+- Endpoint: `https://shift-cookbook-mcp.onrender.com/mcp` (Streamable HTTP, stateless, JSON responses). `GET /healthz` reports status.
+- Tools: `list_cities`, `list_indicators`, `get_indicator`, `compare_cities`, `get_map_link`, and `search` + `fetch` (the pair ChatGPT deep research needs). Every result carries `sources`, `caveats` (missing data, conflicting SHIFT figures, licence notes) and a `map_link`.
+- It imports `web/src/lib/indicators.ts` and `web/src/data/cities.json` directly (bundled by esbuild), so the connector and the map can't drift apart.
+- Guardrails: 60 requests per minute per IP, 64 KB request limit, 10 s timeout, Origin allowlist (requests without an Origin, i.e. server-to-server, are allowed). Logs hold the tool name, status, timing and a salted IP hash, never arguments.
+- `/connect` on the website explains how to add it in Claude, ChatGPT and Claude Code.
+
+```bash
+cd mcp
+npm ci
+npm run build   # type-check + bundle to dist/server.js
+npm test        # starts the server and drives it with the official MCP client
+MCP_URL=https://shift-cookbook-mcp.onrender.com/mcp npm test   # same tests against the deployed server
+```
 
 ### Run it locally
 
